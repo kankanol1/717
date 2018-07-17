@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            height: 500px;
+            width: 50px;
+            background-color: #27fff9;
+            position: relative;
+            float: left;
+
+        }
+        #div2{
+            /*top: 10px;*/
+            height: 20px;
+            width: 50px;
+            background-color: black;
+            position: absolute;
+        }
+
+        #div3{
+            position: relative;
+            height: 0;
+            width: 500px;
+            background-color: #66ff66;
+            float: left;
+            
+        }
+    </style>
+</head>
+<body>
+
+
+<div id="div1">
+    <div id="div2"></div>
+</div>
+<div id="div3"></div>
+
+<script>
+    var oDiv1 = document.getElementById("div1");
+    var oDiv2 = document.getElementById("div2");
+    var oDiv3 = document.getElementById("div3");
+
+    oDiv2.onmousedown = function(ev){
+        var ev = ev ||event;
+        var disY = ev.clientY - this.offsetTop;
+        document.onmousemove = function(ev){
+            var ev = ev || event;
+            var T = ev.clientY -disY;
+            if(T <0){
+                oDiv2.style.top = "0px";
+            }else if(T >480){
+                oDiv2.style.top = 480+ "px";
+            }
+                oDiv2.style.top = T + "px";
+                var scale = 480/500;
+                oDiv3.style.height =  T/scale ;
+        };
+        document.onmouseup = function(){
+            document.onmousemove = document.onmouseup =null;
+        }
+
+
+    }
+
+
+
+
+</script>
+</body>
+</html>

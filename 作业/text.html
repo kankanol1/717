@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .div-relative{
+            position:relative;
+            color:#000;
+            border:1px solid #000;
+            width:500px;
+            height:400px
+        }
+        .div-a{
+            position:absolute;
+            left:30px;
+            top:30px;
+            border:1px solid #000;
+            background-color: rgba(0,0,0,0);
+            width:200px;
+            height:100px
+        }
+        /* css注释说明： 背景为红色 */
+        .div-b{
+            position:absolute;
+            left:50px;
+            border:1px solid #000;
+            background-color: rgba(0,0,0,0);
+            top:60px;
+            width:400px;
+            height:200px}
+        .div-c{
+            position:absolute;
+            left:80px;
+            top:80px;
+            border: 2px solid #66ff66;
+            width:300px;
+            height:300px;
+            background-color: rgba(0,0,0,0);
+
+        }
+        /* DIV背景颜色为蓝色 */
+    </style>
+</head>
+<body>
+<div class="div-relative">
+    <div class="div-a">我背景为红色</div>
+    <div class="div-b">我背景为黄色</div>
+    <div class="div-c">我背景为蓝色</div>
+</div>
+
+<script>
+    var oDiv = document.querySelector(".div-relative");
+
+
+    var newDiv = document.createElement("div");
+    newDiv.className= "div-a";
+    newDiv.style.left = 100 +"px";
+    console.log(newDiv);
+    oDiv.appendChild(newDiv);
+    newDiv.style.left = 600 +"px";
+    oDiv.appendChild(newDiv);
+    for(var i=0;i<4;i++){
+        newDiv.style.left = i*300 + "px";
+        oDiv.appendChild(newDiv);
+    }
+
+
+
+</script>
+
+</body>
+</html>

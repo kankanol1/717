@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="height: 3000px">
+
+<p style="font-size: 20px">seht</p>
+<script>
+    /*
+
+    浏览器默认事件
+        当发生一件事，浏览器默认做的事情
+
+         解决：那个事件触发了浏览器默认事件，那么我们就给这事件的后面添加
+              return false；
+
+    右键菜单事件（环境菜单）
+        oncontextmenu:右键菜单
+
+ document.onkeydown =function(){
+
+     */
+    document.onkeydown =function(){
+        // alert(1);
+        return false;
+    }
+    document.oncontextmenu = function(){
+        // return false ;
+    }
+</script>
+</body>
+</html>

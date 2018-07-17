@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            /*position: relative;*/
+        }
+        #canvas{
+            height: 400px;
+            width: 350px;
+            border: 1px solid red;
+            position: relative;
+            left: 100px;
+            top: 50px;
+        }
+        p{
+            text-align: center;
+        }
+        .myDiv{
+            position: absolute;
+            border: 1px solid red;
+            background-color: rgba(0,0,0,0);
+        }
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <!--<p>绘制矩形</p>-->
+    <div id="canvas">
+        
+    </div>
+</div>
+
+
+
+<script>
+
+    var oDiv = document.querySelector("#canvas");
+    var newDiv;// = document.createElement("div");
+    var startX,
+        startY,
+        endX,
+        endY;
+    var flag = 0;
+    oDiv.onmousedown = function(ev){
+        var ev = ev || event;
+        flag ++;
+        startX = ev.clientX;
+        startY = ev.clientY;
+        newDiv= document.createElement("div");
+        document.onmousemove = function(ev){
+            var ev = ev || event;
+
+            endX = ev.clientX;
+            endY = ev.clientY;
+            if(endX > oDiv.offsetLeft + oDiv.offsetWidth){
+                endX = oDiv.offsetLeft + oDiv.offsetWidth-10;
+            }
+            if(endY> oDiv.offsetTop + oDiv.offsetHeight){
+                endY = oDiv.offsetTop + oDiv.offsetHeight-10;
+            }
+
+
+            newDiv.style.height = endY - startY + "px";
+            newDiv.style.width = endX - startX + "px";
+            newDiv.style.top = startY - parseInt(oDiv.offsetTop)+ "px";
+            newDiv.style.left = startX - parseInt(oDiv.offsetLeft) +"px";
+
+            newDiv.className = "myDiv";
+
+            newDiv.style.zIndex = "flag";
+
+            oDiv.appendChild(newDiv);
+        };
+
+        document.onmouseup = function(){
+            document.onmousemove = document.onmouseup = null;
+
+        };
+        return false;
+
+    };
+
+</script>
+
+
+</body>
+</html>

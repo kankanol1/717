@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<!--
+
+标准下： return false
+
+IE ：全局捕获，当一个元素设置了全局捕获，那么这个元素就会监听后续发生的所有的事情
+    一旦有事件发生，就会触发设置了全局捕获的这个对象
+
+
+全局捕获
+
+IE: 有  有效
+
+FF: 有 无效
+
+Chrome：无
+
+
+
+
+
+
+
+
+-->
+<input type="button" value="按钮1">
+<input type="button" value="按钮2">
+<script>
+    var oInp = document.getElementsByTagName("input");
+
+    if(oInp[0].setCapture()) oInp[0].setCapture();
+
+
+
+
+    oInp[0].onclick = function(){
+        alert(1);
+    };
+
+    oInp[1].onclick = function(){
+        alert(2);
+    };
+
+</script>
+</body>
+</html>

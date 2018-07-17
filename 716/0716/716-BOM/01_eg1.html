@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #menu{
+            margin: 0;
+            height: 0;
+            list-style: none;
+            width: 100px;
+            display: none;
+            position: relative;
+        }
+        #menu li{
+            font: 12px/40px "微软雅黑";
+            border: 1px solid #27fff9;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var oUl = document.getElementById("menu");
+            document.oncontextmenu = function(ev){
+                var ev = ev || event;
+                oUl.style.display = "block";
+                oUl.style.left = ev.clientX + "px";
+                oUl.style.top = ev.clientY + "px";
+                return false;
+            }
+            document.onclick = function(){
+                oUl.style.display = "none";
+            }
+        }
+
+    </script>
+</head>
+<body>
+
+<ul id="menu">
+    <li>11</li>
+    <li>22</li>
+    <li>33</li>
+    <li>44</li>
+</ul>
+
+
+<script>
+
+
+
+</script>
+</body>
+</html>

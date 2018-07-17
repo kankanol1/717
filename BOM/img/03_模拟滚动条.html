@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+        #div1{
+            margin: 0 auto;
+            height: 1000px;
+            width: 50px;
+            background-color: #27fff9;
+            position: relative;
+
+        }
+        #div2{
+            /*top: 10px;*/
+            height: 100px;
+            width: 50px;
+            background-color: black;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+
+<div id="div1">
+    <div id="div2"></div>
+</div>
+
+
+<script>
+    var oDiv1 = document.getElementById("div1");
+    var oDiv2 = document.getElementById("div2");
+
+    oDiv2.onmousedown = function(ev){
+        var ev = ev ||event;
+        var disY = ev.clientY - this.offsetTop;
+        var oDiv2T = oDiv2.offsetTop;
+        var starP = ev.clientY;
+        document.onmousemove = function(ev){
+            var ev = ev || event;
+            var T = ev.clientY -disY;
+            if(parseInt(oDiv2.style.top) <0){
+                oDiv2.style.top = "0px";
+            }else if(parseInt(oDiv2.style.top) >oDiv1.offsetHeight-oDiv2.offsetHeight){
+                oDiv2.style.top = oDiv1.offsetHeight-oDiv2.offsetHeight + "px";
+            }else{
+                // oDiv2.style.top =  oDiv2T + ev.clientY - starP -disY + "px";
+                oDiv2.style.top = ev.clientY -disY + "px";
+            }
+
+        };
+        document.onmouseup = function(){
+            document.onmousemove = document.onmouseup =null;
+        }
+
+
+    }
+
+
+
+
+</script>
+</body>
+</html>

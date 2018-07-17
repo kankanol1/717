@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            height: 100px;
+            width: 100px;
+            min-width: 50px;
+            background-color: #27fff9;
+            position: absolute;
+            top: 200px;
+            left: 200px;
+            border: 10px solid red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="box"></div>
+
+
+<script>
+    var oBox = document.getElementById("box");
+
+    /* oBox.onmouseover= function(ev){
+         if(ev.clientX > this.offsetLeft + this.offsetWidth -10){
+             document.style.cursor = "col-resize";
+         } else if(ev.clientX < this.offsetLeft +10){
+             alert("left");
+         }
+
+     }*/
+
+    oBox.onmouseover = function(ev){
+        var flag = "";
+        var ev = ev || event;
+        var starPointX = ev.clientX;
+        var starPointY = ev.clientY;
+        var oBoxLeft = this.offsetLeft;
+        var oBoxWidth = this.offsetWidth;
+        var oBoxTop = this.offsetTop;
+        var oBoxHeight = this.offsetHeight;
+
+        if(starPointX> oBoxLeft+ oBoxWidth -10){
+            document.style.cursor = "w-resize";
+
+            flag = "right";
+        }
+        if(starPointX < oBoxLeft +10){
+            flag = "left";
+        }
+        if(starPointY<oBoxTop+10){
+            flag = "top";
+        }
+        if(starPointY>oBoxTop + oBoxHeight-10){
+            flag = "bottom";
+        }
+
+    }
+    oBox.onmousedown = function(ev){
+        var flag = "";
+        var ev = ev || event;
+        var starPointX = ev.clientX;
+        var starPointY = ev.clientY;
+        var oBoxLeft = this.offsetLeft;
+        var oBoxWidth = this.offsetWidth;
+        var oBoxTop = this.offsetTop;
+        var oBoxHeight = this.offsetHeight;
+
+        if(starPointX> oBoxLeft+ oBoxWidth -10){
+            flag = "right";
+        }
+        if(starPointX < oBoxLeft +10){
+            flag = "left";
+        }
+        if(starPointY<oBoxTop+10){
+            flag = "top";
+        }
+        if(starPointY>oBoxTop + oBoxHeight-10){
+            flag = "bottom";
+        }
+        document.onmousemove = function(ev){
+            var ev = ev || event;
+            switch(flag){
+                case "left":
+                    oBox.style.left = oBoxLeft - (starPointX - ev.clientX) + "px";
+                    // oBox.style.width = oBoxLeft - (ev.clientX - starPoint) + "px";
+                    oBox.style.width = oBoxWidth - (ev.clientX - starPointX) + "px";
+
+                    break;
+                case "right":
+                    oBox.style.width = oBoxWidth +(ev.clientX - starPointX) + "px";
+                    break;
+                case "top":
+                    oBox.style.height = oBoxHeight - (ev.clientY - starPointY) + "px";
+                    oBox.style.top = oBoxTop + (ev.clientY - starPointY) + "px";
+                    break;
+                case "bottom":
+                    oBox.style.height = oBoxHeight +(ev.clientY - starPointY) + "px";
+                    break;
+            }
+        };
+        document.onmouseup = function(){
+            document.onmousemove = document.onmouseup = null;
+        };
+
+
+
+    }
+
+
+
+</script>
+</body>
+</html>

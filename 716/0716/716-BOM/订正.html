@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div{
+            height: 100px;
+            width: 100px;
+            background-color: #27fff9;
+            position: absolute;
+        }
+        #div1{
+            height: 100px;
+            width: 100px;
+            background-color: #2639ff;
+            position: relative;
+            left: 500px;
+            top: 300px;
+        }
+        #img1{
+            left: 300px;
+            position: absolute;
+            height: 200px;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="div"></div>
+
+<img src="05.jpg" id="img1">
+
+<script>
+
+
+    /*
+    事件默认行为
+        1、当文字被选中的时候，鼠标拖拽出现问题
+            当鼠标被按下时，如果有文字被选中，就会触发浏览器默认拖拽文字的效果
+                解决方案：
+           非标准下
+            全局捕获        setCapture
+       2、
+     */
+
+    var oDiv = document.getElementById("div");
+    var oImg = document.getElementById("img1");
+
+    drag(oDiv);
+    drag(oImg);
+    function drag(obj){
+
+        //鼠标放上去的效果
+        obj.onmouseover = function(){
+            obj.style.boxShadow = "10px 10px 10px gray";
+        };
+
+        //鼠标点击效果
+        obj.onmousedown = function(ev){
+            var ev = ev || event;
+
+            //初始鼠标到达元素左边界和上边界的值
+            var cY = ev.clientY - obj.offsetTop;
+            var cX = ev.clientX - obj.offsetLeft;
+
+            if(obj.setCapture) obj.setCapture();
+
+            document.onmousemove = function(ev){
+                var ev = ev || event;
+
+                var X = ev.clientX - cX;
+                var Y = ev.clientY - cY;
+
+                if(X < 0){
+                    obj.style.left = "0px";
+                } else if(X> document.documentElement.clientWidth- obj.offsetWidth ){
+                    obj.style.left = document.documentElement.clientWidth - obj.offsetWidth + "px";
+
+                }else{
+                    obj.style.left = ev.clientX - cX + "px";
+                }
+
+                if(Y< 0){
+                    obj.style.top = "0px";
+                } else if(Y > document.documentElement.clientHeight - obj.offsetHeight){
+                    obj.style.top = document.documentElement.clientHeight - obj.offsetHeight + "px";
+
+                }else{
+                    obj.style.top = ev.clientY - cY + "px";
+                }
+            };
+            document.onmouseup = function(){
+                document.onmousemove = document.onmouseup = null;
+                if(obj.releaseCapture) obj.releaseCapture();
+            };
+            return false;
+        };
+
+        //鼠标移开的效果
+        obj.onmouseout= function(){
+            obj.style.boxShadow = "";
+        };
+    }
+
+
+</script>
+
+
+</body>
+</html>

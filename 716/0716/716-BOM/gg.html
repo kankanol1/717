@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div{
+            height: 100px;
+            width: 100px;
+            background-color: #27fff9;
+            position: relative;
+        }
+        #div1{
+            height: 100px;
+            width: 100px;
+            background-color: #2639ff;
+            position: relative;
+            left: 500px;
+            top: 300px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div id="div"></div>
+
+<div id="div12">arav awevgvabebsyrnrebvaet</div>
+
+<script>
+
+
+
+    /*
+
+    事件默认行为
+        1、当文字被选中的时候，鼠标拖拽出现问题
+            当鼠标被按下时，如果有文字被选中，就会触发浏览器默认拖拽文字的效果
+                解决方案：
+        2、非标准下
+            全局捕获        obj.setCapture();
+                            obj.releaseCapture();
+     */
+
+    var oDiv = document.getElementById("div");
+    var cH, cW;
+    oDiv.onmouseover = function(){
+        oDiv.style.background = "red";
+    };
+    oDiv.onmousedown = function(ev){
+        var ev = ev || event;
+        cH = ev.clientY - oDiv.offsetTop;
+        cW = ev.clientX - oDiv.offsetLeft;
+        if(oDiv.setCapture) oDiv.setCapture();
+        document.onmousemove = function(ev){
+            oDiv.style.background = "red";
+            var ev = ev || event;
+            oDiv.style.left = ev.clientX -cW+ "px";
+            oDiv.style.top = ev.clientY -cH+ "px";
+        };
+        document.onmouseup = function(){
+            document.onmousemove = document.onmouseup = null;
+            if(oDiv.releaseCapture) oDiv.releaseCapture();
+        };
+        return false;
+    };
+    oDiv.onmouseout= function(){
+        oDiv.style.background = "";
+    };
+</script>
+
+</body>
+</html>
